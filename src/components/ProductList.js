@@ -116,12 +116,12 @@ function ProductList({ cart, setCart }) {
     return (
         <>
             <div>
-                <h1>This is new shopping Application</h1>
+                <h3 style={{textAlign:'center'}}>This is new shopping Application</h3>
                 <button className='btn btn-primary m-2 p-2' onClick={() => handleProductSort('asc')}>Sort-Product Ascending</button>
                 <button className='btn btn-primary m-2 p-2' onClick={() => handleProductSort('desc')}>Sort-Product Descending</button>
                 
                 <div className='d-flex'>
-                    <h2>Categories</h2>
+                    {/* <h2>Categories</h2> */}
                     {categories.map((category) =>(
                         <button
                             key={category}
@@ -164,12 +164,13 @@ function ProductList({ cart, setCart }) {
                             right: '50%',
                             bottom: 'auto',
                             marginRight: '-50%',
-                            transform: 'translate(-50%, -50%)'
+                            transform: 'translate(-50%, -50%)',
+                            zIndex:'1000'
                         }
                     }}
                 >
                     {singleProduct && (
-                        <div className='single-product-details d-flex'>
+                        <div className='single-product-details d-flex' style={{zIndex:"1000"}}>
                             <div>
                             <h2>Single Product Details</h2>
                             <img src={singleProduct.image} alt="product-img" width="250px" height="300px" />

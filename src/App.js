@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes,Link } from 'react-router-dom';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
-import PurchaseHistory from './components/PurchaseHistory';
+import PurchaseHistory from './components/NavabarPage';
 import Singleproduct from './components/Orderlist';
 import Orderlist from './components/Orderlist';
 import Confermation from './components/Confermation';
+import NavabarPage from './components/NavabarPage';
 
 function App() {
     const [cart, setCart] = useState([]);
@@ -15,8 +16,7 @@ function App() {
         <>
             <div>
                 <nav>
-                    <Link to="/">Home</Link>
-                    <Link to="/cart">Cart</Link>
+                   {/* <NavabarPage/> */}
                 </nav>
                 <Routes>
                    <Route path="/" element={<ProductList cart={cart} setCart={setCart} />} />
