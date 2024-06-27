@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { BsCart4 } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
-import SingleProduct from './Singleproduct';
 import { useNavigate } from 'react-router-dom';
 Modal.setAppElement('#root'); // This is to avoid accessibility issues
 
-function ProductList() {
+function ProductList({ cart, setCart }) {
     const [products, setProducts] = useState([]);
     const [singleProduct, setSingleProduct] = useState(null);
     const [categories, setCategories] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const navigate = useNavigate();
+
     const handleProduct = async () => {
         try {
             const response = await fetch('https://fakestoreapi.com/products');
@@ -91,7 +91,7 @@ function ProductList() {
         }
     };
 
-    const addToCart = async (productId) => {
+    const addToCart = async (product) => {
         try {
             const response = await fetch('https://fakestoreapi.com/carts', {
                 method: 'POST',
@@ -101,16 +101,18 @@ function ProductList() {
                 body: JSON.stringify({
                     userId: 1, // Replace with actual user ID
                     date: new Date().toISOString(),
-                    products: [{ productId, quantity: 1 }]
+                    products: [{ productId: product.id, quantity: 1 }]
                 })
             });
             const data = await response.json();
-            navigate('/Cart');
             console.log('Added to cart:', data);
+            setCart((prevCart) => [...prevCart, { ...product, quantity: 1 }]);
+            navigate('/cart'); // Navigate to the cart page
         } catch (error) {
             console.log("error adding to cart", error);
         }
     };
+
     return (
         <>
             <div>
@@ -120,7 +122,7 @@ function ProductList() {
                 
                 <div className='d-flex'>
                     <h2>Categories</h2>
-                    {categories.map((category) => (
+                    {categories.map((category) =>(
                         <button
                             key={category}
                             className='btn btn-secondary m-2'
@@ -145,7 +147,8 @@ function ProductList() {
                             <p>Category: {product.category}</p>
                             <p>Title: {product.title}</p>
                             <p>Price: {product.price}</p>
-                            <button className='btn btn-danger' title='Dlete-product' onClick={()=>deleteProduct(product.id)}><MdDelete/></button>
+                            <button className='btn btn-danger' title='Delete-product' onClick={()=>deleteProduct(product.id)}><MdDelete/></button>
+                            {/* <button className='btn btn-success' title='Add to cart' onClick={() => addToCart(product)}><BsCart4/></button> */}
                         </div>
                     ))}
                 </div>
@@ -174,7 +177,7 @@ function ProductList() {
                             <p>Title: {singleProduct.title}</p>
                             <p>Description: {singleProduct.description}</p>
                             <p>Price: {singleProduct.price}</p>
-                             <button className='btn btn-primary' title='Add cart' onClick={()=>addToCart(SingleProduct.id)}><BsCart4/></button>
+                             <button className='btn btn-primary' title='Add to cart' onClick={() => addToCart(singleProduct)}><BsCart4/></button>
                             </div>
                            <div>
                            <button className='btn btn-secondary' onClick={closeModal}>X</button>
