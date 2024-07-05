@@ -41,7 +41,7 @@ import { json, Link, useNavigate } from "react-router-dom";
      return(
 
         <>
-        <section class="vh-200 bg-image"
+        {/* <section class="vh-200 bg-image"
   style={{backgroundImage: "url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp')"}}>
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
@@ -99,8 +99,39 @@ import { json, Link, useNavigate } from "react-router-dom";
       </div>
     </div>
   </div>
-</section>
-        
+</section> */}
+          <div class="wrapper">
+        <div class="logo">
+            <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" alt=""/>
+        </div>
+        <div class="text-center mt-4 name">
+           SignUp
+        </div>
+        <form class="p-3 mt-3" onSubmit={handleData}>
+            <div class="form-field d-flex align-items-center">
+                <span class="far fa-user"></span>
+                <input type="text"  name="fullname" id="userName" placeholder="Enter your name" value={data.fullname} onChange={handleInput}/>
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="email" name="email" id="pwd" placeholder="Your email" value={data.email} onChange={handleInput}/>
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="password" id="pwd" placeholder="Your password" value={data.password} onChange={handleInput}/>
+            </div>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="cnfpassword" id="pwd" placeholder="cnf-Password" value={data.cnfpassword} onChange={handleInput}/>
+            </div>
+            <button class="btn mt-3" type="submit">Submit</button>
+
+        </form>
+        <div class="text-center fs-6">
+            <Link to="#">Have already an account? </Link> or <Link to="/">Login here</Link>
+        </div>
+
+    </div>
         </>
      );
 

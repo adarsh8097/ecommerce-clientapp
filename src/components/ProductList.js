@@ -135,7 +135,7 @@ function ProductList({ cart, setCart }) {
          <div  className=''>
          <nav className="navbar navbar-expand-lg  bg-light w-100" style={{position:"fixed",zIndex:"100"}}>
   <div className="container-fluid">
-    <Link className="navbar-brand" to="/">
+    <Link className="navbar-brand" to="/item">
     <img src="https://theforage.wpengine.com/wp-content/uploads/2023/04/navy-wide-logo-2x-300x90-1-120x36.png" width="110px" height="30px"/>
     </Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -144,7 +144,7 @@ function ProductList({ cart, setCart }) {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+          <Link className="nav-link active" aria-current="page" to="/item">Home</Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="#">About</Link>
