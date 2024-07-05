@@ -104,14 +104,14 @@ import { FaEye } from "react-icons/fa";
     </div>
   </div>
 </section> */}
-          <div class="wrapper">
+          <div class="wrapper" style={{width:"100%"}}>
         <div class="logo">
             <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" alt=""/>
         </div>
         <div class="text-center mt-4 name">
            SignUp
         </div>
-        <form class="p-3 mt-3" onSubmit={handleData}>
+        <form class="p-3 mt-3 " onSubmit={handleData}>
             <div class="form-field d-flex align-items-center">
                 <span class="far fa-user" style={{color:"grey"}}><FaUser/></span>
                 <input type="text"  name="fullname" id="userName" placeholder="FullName" value={data.fullname} onChange={handleInput}/>
