@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { BsCart4 } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
+import { IoIosSearch } from "react-icons/io";
+import { Link, useNavigate } from 'react-router-dom';
 Modal.setAppElement('#root'); // This is to avoid accessibility issues
+
 
 function ProductList({ cart, setCart }) {
     const [products, setProducts] = useState([]);
@@ -112,28 +114,86 @@ function ProductList({ cart, setCart }) {
             console.log("error adding to cart", error);
         }
     };
+    
+     
+    const handleRemoveItem = () => {
+        const itemData = localStorage.getItem('UserData');
+           console.log(itemData);
+        if (itemData !== null) {
+            localStorage.removeItem('UserData');
+            console.log("UserData removed");
+            navigate('/'); // Navigate to home or any other route after removal
+        }else{
+            navigate('/');
+        }
+    };
+    
+    
 
     return (
-        <>
-            <div>
-                <h3 style={{textAlign:'center'}}>This is new shopping Application</h3>
-                <button className='btn btn-primary m-2 p-2' onClick={() => handleProductSort('asc')}>Sort-Product Ascending</button>
-                <button className='btn btn-primary m-2 p-2' onClick={() => handleProductSort('desc')}>Sort-Product Descending</button>
-                
-                <div className='d-flex'>
-                    {/* <h2>Categories</h2> */}
+     <>
+         <div  className=''>
+         <nav className="navbar navbar-expand-lg  bg-light w-100" style={{position:"fixed",zIndex:"100"}}>
+  <div className="container-fluid">
+    <Link className="navbar-brand" to="/">
+    <img src="https://theforage.wpengine.com/wp-content/uploads/2023/04/navy-wide-logo-2x-300x90-1-120x36.png" width="110px" height="30px"/>
+    </Link>
+    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+        <li className="nav-item">
+          <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="#">About</Link>
+        </li>
+        <li className="nav-item dropdown">
+          <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           Itemlist
+          </Link>
+          <ul className="dropdown-menu " aria-labelledby="navbarDropdown" style={{ textTransform:"capitalize"}}>
+           
                     {categories.map((category) =>(
-                        <button
+                        <li
                             key={category}
-                            className='btn btn-secondary m-2'
+                            className='m-2'
+                            style={{ cursor:"pointer"}}
                             onClick={() => fetchProductsByCategory(category)}
                         >
                             {category}
-                        </button>
+                        </li>
                     ))}
-                </div>
+                    <li className=' m-2' style={{ cursor:"pointer"}} onClick={() => handleProductSort('asc')}> ascending</li>
+                    <li className=' m-2' style={{ cursor:"pointer"}} onClick={() => handleProductSort('desc')}> descending</li>
                 
-                <div className='container' style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
+               
+            
+          </ul>
+        </li>
+        <li className="nav-item" onClick={handleRemoveItem}>
+        <p className='nav-link' style={{cursor:"pointer"}}> LogOut</p>
+        </li>
+      </ul>
+      <form className="d-flex border border-secondary p-1" style={{borderRadius:"0.5rem"}} >
+         
+        <input className="" type="search" placeholder="Search" aria-label="Search" style={{  outline:"none",border:"none"}}/>
+         <IoIosSearch className='mt-1 fs-4'/>
+       
+      </form>
+    </div>
+  </div>
+</nav>
+            
+                 <div>
+                    <div>
+                <h3 style={{textAlign:'center'}}>This is new shopping Application</h3>
+                
+                </div>
+
+                
+                <div className='container mt-5' style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "10px" }}>
                     {products.map((product) => (
                         <div
                             className='card w-100 p-2'
@@ -157,20 +217,9 @@ function ProductList({ cart, setCart }) {
                     isOpen={modalIsOpen}
                     onRequestClose={closeModal}
                     contentLabel="Single Product Details"
-                    style={{
-                        content: {
-                            top: '50%',
-                            left: '50%',
-                            right: '50%',
-                            bottom: 'auto',
-                            marginRight: '-50%',
-                            transform: 'translate(-50%, -50%)',
-                            zIndex:'1000'
-                        }
-                    }}
                 >
                     {singleProduct && (
-                        <div className='single-product-details d-flex' style={{zIndex:"1000"}}>
+                        <div className='single-product-details d-flex mt-2'>
                             <div>
                             <h2>Single Product Details</h2>
                             <img src={singleProduct.image} alt="product-img" width="250px" height="300px" />
@@ -186,6 +235,7 @@ function ProductList({ cart, setCart }) {
                         </div>
                     )}
                 </Modal>
+            </div>
             </div>
         </>
     );

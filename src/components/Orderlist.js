@@ -34,7 +34,7 @@ const Orderlist = () => {
     };
 
     return (
-        <div className="billing-form-container">
+        <div className="billing-form-container mt-5">
             <h2>Billing Information</h2>
             {!showConfirmation ? (
                 <form onSubmit={handleSubmit} className="billing-form">

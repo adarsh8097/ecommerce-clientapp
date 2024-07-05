@@ -33,9 +33,13 @@ function Cart({ cart, setCart }) {
      const handleData =()=>{
         navigate('/orderlist');
      }
+
+   const  handlevalue =()=>{
+         navigate('/item');
+   }
     return (
         <div>
-            <h2>Cart Items</h2>
+            <h4 className='m-2 p-2' onClick={handlevalue} style={{cursor:'pointer'}}>Home</h4 >
             <table className="table">
                 <thead>
                     <tr>
