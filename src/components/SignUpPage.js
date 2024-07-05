@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "./SignUpPage.css";
-import { json, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { MdEmail } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
  function SignUpform(){
     const navigate = useNavigate();
     
@@ -109,20 +113,21 @@ import { json, Link, useNavigate } from "react-router-dom";
         </div>
         <form class="p-3 mt-3" onSubmit={handleData}>
             <div class="form-field d-flex align-items-center">
-                <span class="far fa-user"></span>
-                <input type="text"  name="fullname" id="userName" placeholder="Enter your name" value={data.fullname} onChange={handleInput}/>
+                <span class="far fa-user" style={{color:"grey"}}><FaUser/></span>
+                <input type="text"  name="fullname" id="userName" placeholder="FullName" value={data.fullname} onChange={handleInput}/>
             </div>
             <div class="form-field d-flex align-items-center">
-                <span class="fas fa-key"></span>
-                <input type="email" name="email" id="pwd" placeholder="Your email" value={data.email} onChange={handleInput}/>
+                <span class="fas fa-key"><MdEmail/></span>
+                <input type="email" name="email" id="pwd" placeholder="Email" value={data.email} onChange={handleInput}/>
             </div>
             <div class="form-field d-flex align-items-center">
-                <span class="fas fa-key"></span>
-                <input type="password" name="password" id="pwd" placeholder="Your password" value={data.password} onChange={handleInput}/>
+            <span class="fas fa-key"><RiLockPasswordFill/></span>
+                <input type="password" name="password" id="pwd" placeholder="Password" value={data.password} onChange={handleInput}/>
+               
             </div>
             <div class="form-field d-flex align-items-center">
-                <span class="fas fa-key"></span>
-                <input type="password" name="cnfpassword" id="pwd" placeholder="cnf-Password" value={data.cnfpassword} onChange={handleInput}/>
+                <span class="fas fa-key"><FaEye/></span>
+                <input type="text" name="cnfpassword" id="pwd" placeholder="Cnf-Password" value={data.cnfpassword} onChange={handleInput}/>
             </div>
             <button class="btn mt-3" type="submit">Submit</button>
 
